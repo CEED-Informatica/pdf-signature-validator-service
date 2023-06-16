@@ -33,3 +33,12 @@ docker run --rm -ti pdf_checker_alpine /bin/sh
 
 pip install flask waitress
 https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server
+
+https://github.com/rochacbruno/flask-project-template.git
+
+
+
+RUN WITH WAITRESS:
+
+waitress-serve --port 5000 signature_verifier:app.app
+python waitres_server.py

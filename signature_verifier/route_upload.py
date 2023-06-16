@@ -1,4 +1,5 @@
-from __main__ import app
+# from __main__ import app
+from .app import app
 
 from flask import request
 
@@ -6,7 +7,7 @@ import json
 import os
 import tempfile
 
-from error_codes import error_codes
+from .error_codes import error_codes
 
 # The directory MUST exists in the system
 TEMP_DIR = '/tmp/python/'
