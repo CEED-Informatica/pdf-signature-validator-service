@@ -41,7 +41,16 @@ docker run --rm -ti --name pdf_checker \
        -p 8080:80 \
        --mount type=bind,source=`pwd`/signature_verifier,target=/signature_verifier \
        pdf_checker python -m signature_verifier
-
+```
+THIS DOESNT WORK: PERMISSION ISSUES?
+If you want to install the module pdf_signature_validator for development:
+```bash
+PDF_SIGNATURE_VALIDATOR=<your absolute path to pdf_signature_validator>
+docker run --rm -ti --name pdf_checker \
+       -p 8080:80 \
+       --mount type=bind,source=`pwd`/signature_verifier,target=/signature_verifier \
+       --mount type=bind,source=$PDF_SIGNATURE_VALIDATOR,target=/pdf_signature_validator \
+       pdf_checker python -m signature_verifier
 ```
 
 # NOTES
@@ -52,18 +61,6 @@ docker exec -ti pdf_checker /bin/bash
 
 curl -X POST -F "file=@/tmp/test.pdf" http://localhost:8080/verify_signature
 
-pip install flask waitress
-https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server
 
-https://github.com/rochacbruno/flask-project-template.git
+PDF_SIGNATURE_VALIDATOR=/home/alvaro/Software/validacion-certificados-2/pdf-signature-validator
 
-
-pip install --no-cache-dir git+https://github.com/CEED-Informatica/pdf-signature-validator.git@master
-
-pip install banana@git+https://github.com/CEED-Informatica/temp-paborrar.git@name
-
-
-RUN WITH WAITRESS:
-
-waitress-serve --port 5000 signature_verifier:app.app
-python waitres_server.py
