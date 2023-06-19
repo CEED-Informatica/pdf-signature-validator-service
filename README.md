@@ -27,9 +27,16 @@ To build the image:
 `docker build -t pdf_checker  .`
 
 
+## Running the server
+
+
 # NOTES
-docker build -t pdf_checker_alpine  -f Dockerfile.alpine .
-docker run --rm -ti pdf_checker_alpine /bin/sh
+docker build -t pdf_checker .
+docker run --rm --port 8080:80 --name pdf_checker -ti pdf_checker /bin/bash
+
+docker exec -ti pdf_checker /bin/bash
+
+curl -X POST -F "file=@/tmp/test.pdf" http://localhost:8080/verify_signature
 
 pip install flask waitress
 https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server
