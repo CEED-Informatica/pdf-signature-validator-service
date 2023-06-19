@@ -7,6 +7,7 @@ import json
 import os
 import tempfile
 
+from pdf_signature_validator import SignatureValidator, SignatureValidatorException
 from .error_codes import error_codes
 
 # The directory MUST exists in the system
@@ -37,6 +38,7 @@ def temporary_filename():
 # -----------------------------------------------------
 @app.route('/verify_signature', methods=['POST'])
 def upload_file():
+
     file = request.files.get('file', None)
     if not file: return JSONError('NO_FILE')
 

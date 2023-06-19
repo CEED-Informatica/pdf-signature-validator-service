@@ -29,6 +29,20 @@ To build the image:
 
 ## Running the server
 
+```bash
+docker run --rm -p 8080:80 -ti pdf_checker
+```
+
+## Development?
+
+To start a container for development:
+```bash
+docker run --rm -ti --name pdf_checker \
+       -p 8080:80 \
+       --mount type=bind,source=`pwd`/signature_verifier,target=/signature_verifier \
+       pdf_checker python -m signature_verifier
+
+```
 
 # NOTES
 docker build -t pdf_checker .
@@ -43,6 +57,10 @@ https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-productio
 
 https://github.com/rochacbruno/flask-project-template.git
 
+
+pip install --no-cache-dir git+https://github.com/CEED-Informatica/pdf-signature-validator.git@master
+
+pip install banana@git+https://github.com/CEED-Informatica/temp-paborrar.git@name
 
 
 RUN WITH WAITRESS:

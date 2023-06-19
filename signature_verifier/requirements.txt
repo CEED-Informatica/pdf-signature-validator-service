@@ -1,1 +1,2 @@
 Flask==2.3.2
+pdf_signature_validator @ git+https://github.com/CEED-Informatica/pdf-signature-validator.git@master

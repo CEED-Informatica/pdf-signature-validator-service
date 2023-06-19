@@ -5,7 +5,8 @@ FROM python:${PYTHON_VERSION}-${DEBIAN_VERSION}
 EXPOSE 80
 ENV SERVER_PORT=80
 
-RUN apt-get update && apt-get upgrade -y
+ENV PACKAGES="git"
+RUN apt-get update && apt-get upgrade -y && apt-get install -y $PACKAGES
 
 #-----------------------------------------------------
 # User
