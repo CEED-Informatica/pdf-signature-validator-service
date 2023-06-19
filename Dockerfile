@@ -35,6 +35,8 @@ COPY certificates /certificates
 COPY scripts /scripts
 RUN chmod ug+x /scripts/*.sh
 RUN /scripts/build_certificate_database.sh
+# The database is owned by root, but we need to access it from the appuser
+RUN chown -R appuser /certificates_database
 
 #-----------------------------------------------------
 # Flask app

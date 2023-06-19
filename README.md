@@ -29,8 +29,15 @@ To build the image:
 
 ## Running the server
 
+Start the container with:
 ```bash
 docker run --rm -p 8080:80 -ti pdf_checker
+```
+
+Invoke the endpoint with:
+```bash
+FILE=<your pdf file>
+curl -X POST -F "file=@$FILE" http://localhost:8080/verify_signature
 ```
 
 ## Development?
@@ -42,7 +49,8 @@ docker run --rm -ti --name pdf_checker \
        --mount type=bind,source=`pwd`/signature_verifier,target=/signature_verifier \
        pdf_checker python -m signature_verifier
 ```
-THIS DOESNT WORK: PERMISSION ISSUES?
+
+THIS DOESNT WORK: WRITE PERMISSION ISSUES WHEN BUILDING?
 If you want to install the module pdf_signature_validator for development:
 ```bash
 PDF_SIGNATURE_VALIDATOR=<your absolute path to pdf_signature_validator>
@@ -59,7 +67,7 @@ docker run --rm --port 8080:80 --name pdf_checker -ti pdf_checker /bin/bash
 
 docker exec -ti pdf_checker /bin/bash
 
-curl -X POST -F "file=@/tmp/test.pdf" http://localhost:8080/verify_signature
+
 
 
 PDF_SIGNATURE_VALIDATOR=/home/alvaro/Software/validacion-certificados-2/pdf-signature-validator

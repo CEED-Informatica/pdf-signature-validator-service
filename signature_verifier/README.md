@@ -7,10 +7,11 @@ You must check HTTP status. If you receive a 200, the verification could have su
 
 ### Success outputs
 
-They will have success as true, and ¿THE ONES WHO SIGNED THE PDF?
+They will have success as true, and the common name of the pdf's signer:
 ```
 {
-  "success": true
+  "success": true,
+  "CN": <common name of the signer>
 }
 ```
 
@@ -26,23 +27,25 @@ They will have `success` as false, an error code, an error message and an option
 }
 ```
 
+The error codes are the ones defined in error_codes.py:
+```python
+error_codes = {
+    'NO_FILE': 'No file uploaded',
+    'INVALID_FILE': 'Invalid file uploaded',
+}
+```
 
-# WORKING NOTES
+It can also return error codes from `pdf_signature_validation` module:
 
-pyenv virtualenv 3.11.1 validacion-certificados
-pip install flask
-
-OK:
-curl -X POST -F "file=@/path/to/file" http://localhost:5000/verify_signature
-
-"No file uploaded"
-curl -X POST -F "filee=@./banana.txt" http://localhost:5000/verify_signature
-
-
-docker run --rm --name pdf_checker -ti pdf_checker /bin/bash
-
-docker cp
-
+```python
+'PDFSIG_ERROR': 'Error running pdfsig',
+'PDFSIG_BAD_OUTPUT': 'Error parsing pdfsig output',
+'NOT_SIGNED': 'The PDF file is not signed',
+'INVALID_SIGNATURE': 'The signature is not valid',
+'EXPIRED_CERTIFICATE': 'The certificate has expired',
+'REVOKED_CERTIFICATE': 'The certificate has been revoked',
+'NOT_VALID_CERTIFICATE': 'The certificate is not valid',
+```
 
 
 
