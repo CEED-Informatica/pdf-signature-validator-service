@@ -54,14 +54,17 @@ def upload_file():
         return JSONError('INVALID_FILE')
 
     download_filename = temporary_filename()
+    app.logger.info(f'Saving file to {download_filename}')
     file.save(download_filename)
 
     validator = SignatureValidator(download_filename, CERTIFICATE_DATABASE)
     try:
         signer = validator.get_signer()
+        app.logger.info(f'Valid signature: {signer}')
         os.remove(download_filename)
         return JSONOK(signer)
     except SignatureValidatorException as e:
+        app.logger.error(f'Error validating signature: {e.error_code} {e.error_message} {e.output}')
         os.remove(download_filename)
         return JSONError(e.error_code, e.error_message, e.output)
 
