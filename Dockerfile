@@ -25,7 +25,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Install pdfsig and certutil
 # We need to pin the poppler-utils version because we depend on its output
 # It will probably work with newer versions, but we need to test it
-ENV POPPLER_VERSION="20.09.0-3.1+deb11u1"
+ENV POPPLER_VERSION="20.09.0-3.1+deb11u2"
 ENV PACKAGES="poppler-utils=${POPPLER_VERSION} libnss3-tools"
 RUN apt-get install $PACKAGES -y
 
